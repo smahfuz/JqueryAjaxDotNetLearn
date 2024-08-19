@@ -28,3 +28,4 @@ E:\wevdev\school\JqueryAjax\JqueryAjax\obj\Debug\net8.0\refint\JqueryAjax.dll
 E:\wevdev\school\JqueryAjax\JqueryAjax\obj\Debug\net8.0\JqueryAjax.pdb
 E:\wevdev\school\JqueryAjax\JqueryAjax\obj\Debug\net8.0\JqueryAjax.genruntimeconfig.cache
 E:\wevdev\school\JqueryAjax\JqueryAjax\obj\Debug\net8.0\ref\JqueryAjax.dll
+E:\wevdev\school\JqueryAjax\JqueryAjax\obj\Debug\net8.0\JqueryAjax.sourcelink.json

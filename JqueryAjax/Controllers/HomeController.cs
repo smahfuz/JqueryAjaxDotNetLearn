@@ -28,5 +28,10 @@ namespace JqueryAjax.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public int Add(int num1, int num2)
+        {
+            return num1 + num2;
+        }
     }
 }

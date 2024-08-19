@@ -19,10 +19,14 @@
     <div class="col-md-9"><input type="text" id="txtval2" /></div>
 
 </div>
-<div class="row">
+<div class="row mb-10">
 
     <div class="col-md-3"></div>
-    <div class="col-md-9"><a href="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUM</a></div>
+    <div class="col-md-9">
+        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUM</a>
+        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUM</a>
+        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUM</a>
+    </div>
 
 </div>
 <div class="row">
@@ -42,10 +46,25 @@
         function fnSum() {
             var x = parseInt($("#txtval1").val());
             var y = parseInt($("#txtval2").val());
-            var z = x + y;
+            // var z = x + y;
 
-            $("#divResult").html(z);
-            alert(z);
+            // $("#divResult").html(z);
+            // alert(z);
+            //url: "/Home/Add",
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Add", "Home")",
+                data: {num1:x, num2:y},
+                dataType:"text",
+                success: function (msg) {
+                    alert(msg);
+                    $("#divResult").html(msg);
+                },
+                error: function (req, status, error) {
+
+                }
+            });
         }
     </script>
 }
