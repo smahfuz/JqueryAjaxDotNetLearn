@@ -23,9 +23,10 @@
 
     <div class="col-md-3"></div>
     <div class="col-md-9">
-        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUM</a>
-        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUM</a>
-        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUM</a>
+       @*  <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUM</a>
+        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUB</a>
+        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">MUL</a> *@
+                    <ahref ="javascript:void(0)" class="btn btn-success" onclick="fnCalculate()">Calculate</a>
     </div>
 
 </div>
@@ -43,7 +44,31 @@
         //     alert("mahfuz");
         // });
 
-        function fnSum() {
+        // function fnSum() {
+        //     var x = parseInt($("#txtval1").val());
+        //     var y = parseInt($("#txtval2").val());
+        //     // var z = x + y;
+
+        //     // $("#divResult").html(z);
+        //     // alert(z);
+        //     //url: "/Home/Add",
+
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "@Url.Action("Add", "Home")",
+        //         data: {num1:x, num2:y},
+        //         dataType:"text",
+        //         success: function (msg) {
+        //             alert(msg);
+        //             $("#divResult").html(msg);
+        //         },
+        //         error: function (req, status, error) {
+
+        //         }
+        //     });
+        // }
+
+        function fnCalculate() {
             var x = parseInt($("#txtval1").val());
             var y = parseInt($("#txtval2").val());
             // var z = x + y;
@@ -54,11 +79,13 @@
 
             $.ajax({
                 type: "POST",
-                url: "@Url.Action("Add", "Home")",
-                data: {num1:x, num2:y},
-                dataType:"text",
-                success: function (msg) {
-                    alert(msg);
+                url: "/Home/CalculateNumber",
+                data: { num1: x, num2: y, "msgs": "mahfuz" },
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    alert(result);
+                    var msg = "sum : " + result.add + "sub : " + result.substruct + "mul : " + result.multiply + "div : " + result.division;
                     $("#divResult").html(msg);
                 },
                 error: function (req, status, error) {
