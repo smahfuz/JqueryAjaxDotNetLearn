@@ -6,35 +6,66 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
- 
-<div class="row " >
 
-    <div class="col-md-3">First Value</div>
-    <div class="col-md-9"><input type="text" id="txtval1"  /></div>
-
+<div class="row">
+    <div class="col-md-3">Name</div>
+    <div class="col-md-9">
+        <input id="txtname" type="text" class="form-control" />
+        <span id="errName" style="color:red"></span>
+    </div>
 </div>
 <div class="row">
-
-    <div class="col-md-3">Second Value</div>
-    <div class="col-md-9"><input type="text" id="txtval2" /></div>
-
-</div>
-<div class="row mb-10">
-
     <div class="col-md-3"></div>
     <div class="col-md-9">
-       @*  <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUM</a>
-        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUB</a>
-        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">MUL</a> *@
-                    <ahref ="javascript:void(0)" class="btn btn-success" onclick="fnCalculate()">Calculate</a>
+        <a href="javascript:void(0)" class="btn btn-success" onclick="saveRecord()">Submit</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">PHONE</div>
+    <div class="col-md-9">
+        <input id="phone" type="text" class="form-control" />
+        <span id="errPhone" style="color:red"></span>
+    </div>
+    
+</div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+        <button id="validateBtn" class="btn btn-primary">Validate</button>
+
     </div>
 
 </div>
-<div class="row">
 
+
+<div class="row">
+    <div class="col-md-3">First Value</div>
+    <div class="col-md-9">
+        <input type="text" id="txtval1" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">Second Value</div>
+    <div class="col-md-9">
+        <input type="text" id="txtval2" />
+    </div>
+</div>
+
+<div class="row mb-10">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+        @*  <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUM</a>
+        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">SUB</a>
+        <ahref="javascript:void(0)" class="btn btn-success" onclick="fnSum()">MUL</a> *@
+        <a href="javascript:void(0)" class="btn btn-success" onclick="fnCalculate()">Calculate</a>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-9" id="divResult"></div>
-
 </div>
 
 @section Scripts {
@@ -67,6 +98,39 @@
         //         }
         //     });
         // }
+        $("#validateBtn").click(function () {
+            // ফোন নম্বরের জন্য Regex যেখানে প্রথম দুটি সংখ্যা 01 এবং তারপর 9টি সংখ্যা থাকতে হবে
+            var phoneRegex = /^01[0-9]{9}$/;
+
+            var phoneNumber = $("#phone").val();
+
+            if (phoneRegex.test(phoneNumber)) {
+                alert("Valid phone number");
+                $("#errPhone").hide();
+            } else {
+                $("#errPhone").show().text("Invalid phone number");
+            }
+        });
+        function saveRecord() {
+            alert("hii");
+            if (!validateName()) {
+                return false;
+            } else {
+                alert("validate");
+            }
+        }
+
+        function validateName() {
+            var result = true;
+            if ($("#txtname").val().trim().length == 0) {
+                $("#errName").show();
+                $("#errName").text("Name required");
+                result = false;
+            } else {
+                $("#errName").hide();
+            }
+            return result;
+        }
 
         function fnCalculate() {
             var x = parseInt($("#txtval1").val());
@@ -85,11 +149,11 @@
                 success: function (result) {
                     console.log(result);
                     alert(result);
-                    var msg = "sum : " + result.add + "sub : " + result.substruct + "mul : " + result.multiply + "div : " + result.division;
+                    var msg = "sum: " + result.add + ", sub: " + result.substruct + ", mul: " + result.multiply + ", div: " + result.division;
                     $("#divResult").html(msg);
                 },
                 error: function (req, status, error) {
-
+                    console.log("Error: " + error);
                 }
             });
         }
